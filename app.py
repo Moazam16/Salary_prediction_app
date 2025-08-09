@@ -1,0 +1,61 @@
+
+import streamlit as st
+import joblib
+import numpy as np
+
+# --- Page config ---
+st.set_page_config(page_title="💼 Salary Prediction", page_icon="💰", layout="centered")
+
+# --- Custom CSS ---
+st.markdown("""
+    <style>
+        .main {
+            background-color: #f5f7fa;
+        }
+        h1 {
+            color: #2E86C1;
+            text-align: center;
+        }
+        .stTextInput input {
+            border: 2px solid #2E86C1;
+            border-radius: 8px;
+        }
+        .prediction-box {
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            border: 1px solid #aed6f1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #154360;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# --- Load model ---
+model = joblib.load('model.pkl')
+
+# --- Title ---
+st.markdown("<h1>💼 Salary Prediction System</h1>", unsafe_allow_html=True)
+st.write("Enter your **Years of Experience** below to estimate your salary.")
+
+# --- Input ---
+user_text = st.text_input("📅 Years of Experience", placeholder="e.g., 5")
+
+# --- Prediction Button ---
+if st.button("🔍 Predict Salary"):
+    if not user_text.strip():
+        st.error("⚠ Please enter a value")
+    else:
+        try:
+            years_exp = float(user_text)
+            input_data = np.array([[years_exp]])
+            result = model.predict(input_data)
+            salary = float(result[0])
+
+            # Styled prediction box
+            st.markdown(f"<div class='prediction-box'>💰 Predicted Salary: ${salary:,.2f}</div>", unsafe_allow_html=True)
+
+        except ValueError:
+            st.error("❌ Please enter a valid numeric value")
