@@ -1,8 +1,8 @@
-# 💼 Salary Prediction using Traditional Machine Learning
+# Salary Prediction using Traditional Machine Learning
 
 This project predicts a person's salary based on their **experience**, using traditional regression techniques.
 
-## 📌 Project Overview
+##  Project Overview
 
 The goal of this project is to:
 
@@ -64,7 +64,7 @@ Example:
   - Years of Experience
 - Predicts salary instantly.
 
-### 6️⃣ Hosting on Streamlit
+### Hosting on Streamlit
 
 - Hosted the Streamlit app for public access.
 - Linked it in the GitHub repo.
